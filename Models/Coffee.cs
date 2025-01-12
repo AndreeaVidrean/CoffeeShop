@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using SQLite;
 
 namespace CoffeeShop.Models
@@ -7,15 +8,17 @@ namespace CoffeeShop.Models
     public class Coffee
     {
         [PrimaryKey, AutoIncrement]
-        public int ID { get; set; } // Identificator unic
+        public int ID { get; set; }
 
         [MaxLength(250), Unique]
-        public string Name { get; set; } // Numele produsului
+        public string Name { get; set; }
 
-        public string Description { get; set; } // Descrierea produsului
+        public string Description { get; set; }
 
-        public decimal Price { get; set; } // Prețul produsului
+        public decimal Price { get; set; }
 
-        public DateTime CreatedDate { get; set; } // Data adăugării
+        public DateTime CreatedDate { get; set; }
+
+        public int CoffeeShopLocationID { get; set; }
     }
 }

@@ -24,7 +24,22 @@ namespace CoffeeShop
         public App()
         {
             InitializeComponent();
+            RequestPermissionsAsync();
+
             MainPage = new AppShell();
+        }
+        private async Task RequestPermissionsAsync()
+        {
+            var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+            if (status != PermissionStatus.Granted)
+            {
+                status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+            }
+
+            if (status != PermissionStatus.Granted)
+            {
+                await MainPage.DisplayAlert("Permission Denied", "Location permission is required to use this feature.", "OK");
+            }
         }
     }
 }

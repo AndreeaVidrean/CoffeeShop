@@ -2,11 +2,23 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CoffeeShop.AddCoffeePage"
-             Title="Adaugă/Editează Produs">
+             Title="Add/Edit Coffee">
     <StackLayout Padding="20">
-        <Entry Placeholder="Nume Produs" Text="{Binding Name}" />
-        <Entry Placeholder="Preț" Text="{Binding Price}" Keyboard="Numeric" />
-        <Button Text="Salvează" Clicked="OnSaveClicked" />
-        <Button Text="Șterge" Clicked="OnDeleteClicked" />
+        <Label Text="Coffee Name" />
+        <Entry Text="{Binding Name}" Placeholder="Enter coffee name" />
+
+        <Label Text="Description" />
+        <Editor Text="{Binding Description}" Placeholder="Enter description" />
+
+        <Label Text="Price" />
+        <Entry Text="{Binding Price}" Placeholder="Enter price" Keyboard="Numeric" />
+
+        <Label Text="Date Created" />
+        <Label Text="{Binding CreatedDate}" />
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Button Text="Save" Clicked="OnSaveClicked" />
+            <Button Text="Delete" Clicked="OnDeleteClicked" IsVisible="{Binding ID, Converter={StaticResource NullToVisibilityConverter}}" />
+        </StackLayout>
     </StackLayout>
 </ContentPage>

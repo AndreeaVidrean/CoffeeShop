@@ -20,4 +20,9 @@
         <ShellContent Title="Meniu" ContentTemplate="{DataTemplate local:MenuItemPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Coffee Shop Locations" Icon="locations_icon.png">
+        <ShellContent Title="Locations" ContentTemplate="{DataTemplate local:CoffeeShopLocationsPage}" />
+    </FlyoutItem>
+
+
 </Shell>

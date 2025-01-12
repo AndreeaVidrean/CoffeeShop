@@ -12,8 +12,40 @@ namespace CoffeeShop.Data
         public CoffeeShopDatabase(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
+
+            // Crearea tabelelor
+            _database.CreateTableAsync<CoffeeShopLocation>().Wait();
             _database.CreateTableAsync<Coffee>().Wait();
         }
+
+
+
+        public Task<List<CoffeeShopLocation>> GetCoffeeShopLocationsAsync()
+        {
+            return _database.Table<CoffeeShopLocation>().ToListAsync();
+        }
+
+        // Salvează o locație CoffeeShop
+        public Task<int> SaveCoffeeShopLocationAsync(CoffeeShopLocation location)
+        {
+            if (location.ID != 0)
+            {
+                return _database.UpdateAsync(location);
+            }
+            else
+            {
+                return _database.InsertAsync(location);
+            }
+        }
+
+        // Șterge o locație CoffeeShop
+        public Task<int> DeleteCoffeeShopLocationAsync(CoffeeShopLocation location)
+        {
+            return _database.DeleteAsync(location);
+        }
+    
+
+
 
         // Obține toate produsele
         public Task<List<Coffee>> GetCoffeesAsync()
@@ -47,6 +79,14 @@ namespace CoffeeShop.Data
         {
             return _database.DeleteAsync(coffee);
         }
+        public async Task<List<Coffee>> GetCoffeesForLocationAsync(int locationId)
+        {
+            return await _database.Table<Coffee>()
+                                  .Where(c => c.CoffeeShopLocationID == locationId)
+                                  .ToListAsync();
+        }
+
+        
 
 
     }
